@@ -348,4 +348,27 @@ def p13():
     ]
     print(str(sum(values))[0:10])
 
-p13()
+def collatz(start):
+    seq = [start]
+    n = start
+    while n > 1:
+        if n % 2 == 0:
+            # n is even
+            n = int(n/2)
+        else:
+            # n is odd
+            n = (3*n)+1
+        seq.append(n)
+    return seq
+
+# Longest Collatz sequence
+def p14():
+    largestChain = 0
+    for n in range(1000000):
+        seq = collatz(n)
+        length = len(seq)
+        if length > largestChain:
+            largestChain = length
+            print(n)
+
+p14()
