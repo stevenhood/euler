@@ -24,18 +24,25 @@ def p2():
         f1, f2 = f2, new_term
     print(sum)
 
+# Optimised version of isPrime (see PDF)
+def isPrime(n):
+    if n == 1: return False
+    if n < 4: return True
+    if n % 2 == 0: return False
+    if n < 9: return True
+    if n % 3 == 0: return False
+    r = math.floor(math.sqrt(n))
+    f = 5
+    while f <= r:
+        if n % f == 0:
+            return False
+        if n % (f + 2) == 0:
+            return False
+        f = f + 6
+    return True
+
 # Largest prime factor
 def p3():
-    def isPrime(n):
-        # Prime numbers are greater than 1
-        if n <= 1:
-            return False
-
-        for i in range(2, n):
-            if (n % i) == 0:
-                return False
-        return True
-
     val = 600851475143
     largest_prime_factor = 1
     for i in range(1, val):
@@ -104,22 +111,6 @@ def p6():
 
 # 10001st prime
 def p7():
-    # Optimised version of isPrime (see PDF)
-    def isPrime(n):
-        if n == 1: return False
-        if n < 4: return True
-        if n % 2 == 0: return False
-        if n < 9: return True
-        if n % 3 == 0: return False
-        r = math.floor(math.sqrt(n))
-        f = 5
-        while f <= r:
-            if n % f == 0:
-                return False
-            if n % (f + 2) == 0:
-                return False
-            f = f + 6
-        return True
     count = 1
     n = 0
     while count <= 10001:
@@ -147,7 +138,6 @@ def p8():
 # Special Pythagorean triplet
 def p9():
     isTriplet = lambda a,b,c: a**2 + b**2 == c**2
-    s = 1000
     c = 1
     while True:
         for b in range(1, c):
@@ -158,4 +148,12 @@ def p9():
                     return
         c += 1
 
-p9()
+# Summation of primes
+def p10():
+    total = 0
+    for n in range(1, 2000000):
+        if isPrime(n):
+            total += n
+    print(total)
+
+p10()
