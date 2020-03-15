@@ -371,4 +371,69 @@ def p14():
             largestChain = length
             print(n)
 
-p14()
+# Lattice paths
+def p15():
+    pass
+
+# Power digit sum
+def p16():
+    x = 2**1000
+    sum_of_digits = sum(list(map(lambda n: int(n), str(x))))
+    print(sum_of_digits)
+
+# Number letter counts
+def p17():
+    single = ['','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen']
+    tens_map = {
+        1: 'ten',
+        2: 'twenty',
+        3: 'thirty',
+        4: 'forty',
+        5: 'fifty',
+        6: 'sixty',
+        7: 'seventy',
+        8: 'eighty',
+        9: 'ninety',
+    }
+    # for i in range(len(single)):
+    #     print(f"{i}: {single[i]}")
+
+    totalLen = 0
+    for n in range(1000):
+        #print(f"current number: {n}")
+        if n < len(single):
+            totalLen += len(single[n])
+            print(single[n])
+        else:
+            number_in_words = ''
+            hundreds = math.floor(n / 100)
+            tens = math.floor((n - hundreds * 100) / 10)
+            units = n - (tens * 10) - (hundreds * 100)
+            combined_tens_and_units = False
+            print(f"hundreds: {hundreds}")
+            print(f"tens: {tens}")
+            print(f"units: {units}")
+
+            if hundreds > 0:
+                number_in_words += single[hundreds] + 'hundred'
+
+            if hundreds > 0 and (tens > 0 or units > 0):
+                number_in_words += 'and'
+
+            if tens == 1 and units >= 0:
+                combined_tens_and_units = True
+                number_in_words += single[units + 10]
+            elif tens > 1:
+                number_in_words += tens_map[tens]
+
+            # e.g. "eleven"
+            if not combined_tens_and_units:
+                number_in_words += single[units]
+
+            totalLen += len(number_in_words)
+            print(f"{n} = {number_in_words}")
+    print('onethousand')
+    totalLen += len('onethousand')
+    print(totalLen)
+
+p17()
