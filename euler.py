@@ -395,12 +395,9 @@ def p17():
         8: 'eighty',
         9: 'ninety',
     }
-    # for i in range(len(single)):
-    #     print(f"{i}: {single[i]}")
 
     totalLen = 0
     for n in range(1000):
-        #print(f"current number: {n}")
         if n < len(single):
             totalLen += len(single[n])
             print(single[n])
@@ -410,9 +407,9 @@ def p17():
             tens = math.floor((n - hundreds * 100) / 10)
             units = n - (tens * 10) - (hundreds * 100)
             combined_tens_and_units = False
-            print(f"hundreds: {hundreds}")
-            print(f"tens: {tens}")
-            print(f"units: {units}")
+            # print(f"hundreds: {hundreds}")
+            # print(f"tens: {tens}")
+            # print(f"units: {units}")
 
             if hundreds > 0:
                 number_in_words += single[hundreds] + 'hundred'
@@ -436,4 +433,58 @@ def p17():
     totalLen += len('onethousand')
     print(totalLen)
 
-p17()
+# Maximum path sum I
+def p18():
+    triangle = [
+        [75],
+        [95,64],
+        [17,47,82],
+        [18,35,87,10],
+        [20, 4,82,47,65],
+        [19, 1,23,75, 3,34],
+        [88, 2,77,73, 7,63,67],
+        [99,65, 4,28, 6,16,70,92],
+        [41,41,26,56,83,40,80,70,33],
+        [41,48,72,33,47,32,37,16,94,29],
+        [53,71,44,65,25,43,91,52,97,51,14],
+        [70,11,33,28,77,73,17,78,39,68,17,57],
+        [91,71,52,38,17,14,91,43,58,50,27,29,48],
+        [63,66, 4,68,89,53,67,30,73,16,69,87,40,31],
+        [ 4,62,98,27,23, 9,70,98,73,93,38,53,60, 4,23]
+    ]
+
+    testTriangle = [
+        [3],
+        [7,4],
+        [2,4,6],
+        [8,5,9,3]
+    ]
+
+    for row in range(len(testTriangle)):
+        print(testTriangle[row])
+
+# Counting Sundays
+def p19():
+    # start on Tuesday as 01/01/1901 was a Tuesday
+    days_of_the_week = ['mon','tue','wed','thu','fri','sat','sun']
+    days_in_each_month = [0,31,28,31,30,31,30,31,31,30,31,30,31]
+    total_day_count = 0
+    sundays_on_first_of_month = 0
+
+    for year in range(1901, 2001):
+        leap_year = year % 4 == 0
+        for month in range(1, 13):
+            days_in_month = days_in_each_month[month]
+            if leap_year and month == 2:
+                days_in_month += 1
+            #print(f"{year}/{month}: days = {days_in_month}")
+            for day in range(1, days_in_month + 1):
+                total_day_count += 1
+                print(f"{year}/{month}/{day} is a {days_of_the_week[total_day_count % len(days_of_the_week)]}")
+                if day == 1 and days_of_the_week[total_day_count % len(days_of_the_week)] == 'sun':
+                    #print(f"found sunday on {year}/{month}/{day} ({total_day_count})")
+                    sundays_on_first_of_month += 1
+    print(sundays_on_first_of_month)
+    print(total_day_count)
+
+p19()
