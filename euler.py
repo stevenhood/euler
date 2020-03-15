@@ -220,4 +220,27 @@ def p11():
                 greatestProduct = prod
                 print(f"product of {selection} == {prod}")
 
-p11()
+def divisors(n):
+    divisors_list = []
+    limit = math.ceil(math.sqrt(n))
+    for i in range(1, limit):
+        if n % i == 0:
+            divisors_list.append(i)
+            if i != n/i:
+                divisors_list.append(n/i)
+    return len(divisors_list)
+
+# Highly divisible triangular number
+def p12():
+    triangle = 1
+    i = 2
+    while True:
+        if divisors(triangle) > 500:
+            print(triangle)
+            break
+        print(f"{triangle} + {i} = {triangle + i}")
+        triangle += i
+        i += 1
+
+
+p12()
