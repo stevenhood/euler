@@ -228,14 +228,14 @@ def divisors(n):
             divisors_list.append(i)
             if i != n/i:
                 divisors_list.append(n/i)
-    return len(divisors_list)
+    return list(map(int, divisors_list))
 
 # Highly divisible triangular number
 def p12():
     triangle = 1
     i = 2
     while True:
-        if divisors(triangle) > 500:
+        if len(divisors(triangle)) > 500:
             print(triangle)
             break
         print(f"{triangle} + {i} = {triangle + i}")
@@ -480,11 +480,29 @@ def p19():
             #print(f"{year}/{month}: days = {days_in_month}")
             for day in range(1, days_in_month + 1):
                 total_day_count += 1
-                print(f"{year}/{month}/{day} is a {days_of_the_week[total_day_count % len(days_of_the_week)]}")
+                #print(f"{year}/{month}/{day} is a {days_of_the_week[total_day_count % len(days_of_the_week)]}")
                 if day == 1 and days_of_the_week[total_day_count % len(days_of_the_week)] == 'sun':
                     #print(f"found sunday on {year}/{month}/{day} ({total_day_count})")
                     sundays_on_first_of_month += 1
     print(sundays_on_first_of_month)
-    print(total_day_count)
 
-p19()
+# Factorial digit sum
+def p20():
+    factorial = lambda n: product(range(1, n+1))
+    print(sum(map(int, str(factorial(100)))))
+
+# Amicable numbers
+def p21():
+    def d(n):
+        # Sum of proper divisors of n
+        # (numbers less than n which divide evenly into n)
+        return sum(filter(lambda x: x < n, divisors(n)))
+    amicable = set()
+    for a in range(1, 10000):
+        b = d(a)
+        if d(b) == a and a != b:
+            amicable.add(a)
+            amicable.add(b)
+    print(sum(amicable))
+
+p21()
