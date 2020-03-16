@@ -505,4 +505,48 @@ def p21():
             amicable.add(b)
     print(sum(amicable))
 
-p21()
+def p22():
+    letters_map = {
+        'a': 1,
+        'b': 2,
+        'c': 3,
+        'd': 4,
+        'e': 5,
+        'f': 6,
+        'g': 7,
+        'h': 8,
+        'i': 9,
+        'j': 10,
+        'k': 11,
+        'l': 12,
+        'm': 13,
+        'n': 14,
+        'o': 15,
+        'p': 16,
+        'q': 17,
+        'r': 18,
+        's': 19,
+        't': 20,
+        'u': 21,
+        'v': 22,
+        'w': 23,
+        'x': 24,
+        'y': 25,
+        'z': 26,
+    }
+
+    with open('p022_names.txt', 'r') as f:
+        names_list = list(map(lambda s: s.strip('"'), f.readline().split(',')))
+    names_list = sorted(names_list)
+
+    total = 0
+    count = 1
+    for name in names_list:
+        value = 0
+        for letter in name:
+            value += letters_map[letter.lower()]
+        total += value * count
+        count += 1
+    print(total)
+
+p22()
