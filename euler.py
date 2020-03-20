@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import functools
+import itertools
 import math
 
 # Multiples of 3 and 5
@@ -505,6 +506,7 @@ def p21():
             amicable.add(b)
     print(sum(amicable))
 
+# Names scores
 def p22():
     letters_map = {
         'a': 1,
@@ -549,4 +551,54 @@ def p22():
         count += 1
     print(total)
 
-p22()
+# Non-abundant sums
+def p23():
+    def abundant(n):
+        return sum(filter(lambda x: x < n, divisors(n))) > n
+
+    # Find abundant numbers
+    abundant_set = set()
+    for n in range(1, 28123 + 1):
+        if abundant(n):
+            abundant_set.add(n)
+
+    total = 0
+    for n in range(1, 28123 + 1):
+        candidates = list(filter(lambda x: x < n, abundant_set))
+        pairs = list(itertools.combinations(candidates, 2))
+        nosum = True
+        for a,b in pairs:
+            if a+b == n:
+                # print(f"failed: {a}+{b} = {n}")
+                nosum = False
+                break
+        if nosum:
+            total += n
+            print(f"{total} ({n}/{28123})")
+    print(total)
+
+# Lexicographic permutations
+def p24():
+    pass
+
+# 1000-digit Fibonacci number
+def p25():
+    memo = {}
+    def fib(n):
+        if n <= 2:
+            return 1
+        elif n in memo:
+            return memo[n]
+        else:
+            result = fib(n-1) + fib(n-2)
+            memo[n] = result
+            return result
+
+    index = 1
+    while True:
+        if len(str(fib(index))) == 1000:
+            print(index)
+            return
+        index += 1
+
+p25()
