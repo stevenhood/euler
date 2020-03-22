@@ -601,4 +601,11 @@ def p25():
             return
         index += 1
 
-p25()
+# Self powers
+def p48():
+    total = 0
+    for i in range(1, 1001):
+        total += i**i
+    print(str(total)[-10:])
+
+p48()
